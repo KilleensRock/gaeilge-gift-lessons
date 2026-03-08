@@ -28,7 +28,7 @@ const features = [
   },
   {
     icon: Users,
-    title: "Small Groups",
+    title: "Small Groups or Individual",
     description: "Intimate class sizes so you get the attention and practice time you deserve.",
   },
 ];
