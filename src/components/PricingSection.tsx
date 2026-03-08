@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Check, BookOpen } from "lucide-react";
 
@@ -11,6 +16,30 @@ const included = [
 ];
 
 const PricingSection = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+
+  const handleBook = async () => {
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("create-payment");
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch (err: any) {
+      toast({ title: "Error", description: err.message || "Something went wrong", variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="py-24 px-6" style={{ background: "linear-gradient(180deg, hsl(40, 33%, 98%), hsl(145, 20%, 95%))" }}>
       <div className="max-w-4xl mx-auto">
@@ -38,9 +67,14 @@ const PricingSection = () => {
                 </li>
               ))}
             </ul>
-            <Button size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-body text-lg py-6 rounded-lg">
+            <Button
+              size="lg"
+              onClick={handleBook}
+              disabled={loading}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-body text-lg py-6 rounded-lg"
+            >
               <BookOpen className="mr-2 h-5 w-5" />
-              Book Your Lesson
+              {loading ? "Processing..." : "Book Your Lesson"}
             </Button>
           </div>
         </div>
