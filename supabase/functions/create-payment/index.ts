@@ -34,6 +34,8 @@ serve(async (req) => {
       customerId = customers.data[0].id;
     }
 
+    const appUrl = "https://gaeilge-gift-lessons.lovable.app";
+
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
@@ -44,8 +46,8 @@ serve(async (req) => {
         },
       ],
       mode: "payment",
-      success_url: `${req.headers.get("origin")}/payment-success`,
-      cancel_url: `${req.headers.get("origin")}/payment-canceled`,
+      success_url: `${appUrl}/payment-success`,
+      cancel_url: `${appUrl}/payment-canceled`,
     });
 
     return new Response(JSON.stringify({ url: session.url }), {
@@ -53,7 +55,8 @@ serve(async (req) => {
       status: 200,
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    console.error("Payment error:", error);
+    return new Response(JSON.stringify({ error: "An unexpected error occurred. Please try again." }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 500,
     });
