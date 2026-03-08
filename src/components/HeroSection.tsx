@@ -30,12 +30,21 @@ const HeroSection = () => {
             Book a Lesson — $99
           </Button>
           <a href="#gift">
-            <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-body text-lg px-8 py-6 rounded-lg">
+            <Button size="lg" className="bg-primary-foreground/15 backdrop-blur-sm border-2 border-secondary/60 text-secondary hover:bg-primary-foreground/25 font-body text-lg px-8 py-6 rounded-lg">
               <Gift className="mr-2 h-5 w-5" />
               Give as a Gift
             </Button>
           </a>
         </div>
+
+        {/* St. Patrick's Day Offer CTA */}
+        <a href="#stpatricks" className="inline-block mt-8 animate-fade-up" style={{ animationDelay: "0.55s", opacity: 0 }}>
+          <div className="inline-flex items-center gap-3 bg-secondary/20 backdrop-blur-md border border-secondary/40 rounded-full px-6 py-3 hover:bg-secondary/30 transition-all cursor-pointer group">
+            <span className="text-2xl">☘️</span>
+            <span className="font-body text-secondary font-semibold text-base">St. Patrick's Day Special — <span className="line-through opacity-60">$99</span> $69!</span>
+            <span className="font-body text-secondary/70 text-sm group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
