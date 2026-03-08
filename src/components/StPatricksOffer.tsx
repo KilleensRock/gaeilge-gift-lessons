@@ -37,7 +37,7 @@ const StPatricksOffer = () => {
   };
 
   return (
-    <section className="relative overflow-hidden py-16 px-6" style={{ background: "linear-gradient(135deg, hsl(145, 50%, 20%), hsl(145, 45%, 28%), hsl(130, 40%, 22%))" }}>
+    <section id="stpatricks" className="relative overflow-hidden py-16 px-6" style={{ background: "linear-gradient(135deg, hsl(145, 50%, 20%), hsl(145, 45%, 28%), hsl(130, 40%, 22%))" }}>
       {/* Decorative shamrocks */}
       <div className="absolute top-4 left-8 text-5xl opacity-10 rotate-12">☘️</div>
       <div className="absolute bottom-6 right-12 text-7xl opacity-10 -rotate-6">☘️</div>
