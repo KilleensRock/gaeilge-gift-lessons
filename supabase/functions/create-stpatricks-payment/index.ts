@@ -18,6 +18,14 @@ serve(async (req) => {
   );
 
   try {
+    const offerEnd = new Date("2026-03-31T23:59:59Z");
+    if (new Date() > offerEnd) {
+      return new Response(JSON.stringify({ error: "This offer has expired" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 400,
+      });
+    }
+
     const authHeader = req.headers.get("Authorization")!;
     const token = authHeader.replace("Bearer ", "");
     const { data } = await supabaseClient.auth.getUser(token);
