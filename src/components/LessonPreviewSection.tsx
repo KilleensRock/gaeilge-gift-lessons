@@ -42,7 +42,7 @@ const LessonPreviewSection = () => {
           {topics.map((topic, index) => (
             <div
               key={topic.title}
-              className="bg-card rounded-2xl border border-border p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 items-start hover:shadow-lg transition-shadow duration-300"
+              className="bg-card rounded-2xl border border-border p-6 md:p-10 flex flex-col md:flex-row gap-4 md:gap-10 items-start hover:shadow-lg transition-shadow duration-300"
             >
               <div className="shrink-0">
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
