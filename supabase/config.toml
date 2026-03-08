@@ -2,3 +2,6 @@ project_id = "sbojdkxhzxlcxhdzdunf"
 
 [functions.create-payment]
 verify_jwt = false
+
+[functions.create-stpatricks-payment]
+verify_jwt = false
