@@ -44,16 +44,19 @@ const StPatricksOffer = () => {
       <div className="absolute top-1/2 left-1/3 text-4xl opacity-5 rotate-45">☘️</div>
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-secondary/30">
-          <Clock className="h-4 w-4 text-secondary" />
-          <span className="font-body text-sm text-secondary font-semibold">Offer ends March 31st!</span>
+        <div className="inline-flex items-center gap-2 bg-destructive/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-destructive/50">
+          <Clock className="h-4 w-4 text-primary-foreground" />
+          <span className="font-body text-sm text-primary-foreground font-bold uppercase tracking-wide">Once-only offer — Closes March 31st!</span>
         </div>
 
         <h2 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-3 leading-tight">
-          ☘️ St. Patrick's Day Offer
+          ☘️ St. Patrick's Day — Once Only
         </h2>
-        <p className="font-body text-primary-foreground/80 text-lg mb-8 max-w-xl mx-auto">
-          Celebrate with a special price on your first Irish lesson. Purchase now and schedule your lesson whenever suits you.
+        <p className="font-body text-primary-foreground/80 text-lg mb-4 max-w-xl mx-auto">
+          This is your only chance to get a live Irish lesson at this price. When it's gone, it's gone — no extensions, no repeats.
+        </p>
+        <p className="font-body text-primary-foreground/90 font-semibold text-base mb-8">
+          Don't miss it. There will be no other offer.
         </p>
 
         <div className="flex items-center justify-center gap-4 mb-8">
@@ -72,7 +75,7 @@ const StPatricksOffer = () => {
         </Button>
 
         <p className="font-body text-primary-foreground/50 text-sm mt-4">
-          Same 45-minute lesson • Same expert tutor • Notes & handouts included
+          45-minute live lesson • Expert tutor • Notes & handouts included
         </p>
       </div>
     </section>
