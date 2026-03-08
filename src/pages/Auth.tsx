@@ -26,7 +26,8 @@ const Auth = () => {
         redirectTo: `${window.location.origin}/reset-password`,
       });
       if (error) {
-        toast({ title: "Error", description: error.message, variant: "destructive" });
+        console.error("Password reset error:", error.message);
+        toast({ title: "Error", description: "Unable to send reset link. Please try again.", variant: "destructive" });
       } else {
         toast({
           title: "Check your email",
@@ -36,7 +37,8 @@ const Auth = () => {
     } else if (view === "login") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
-        toast({ title: "Error", description: error.message, variant: "destructive" });
+        console.error("Login error:", error.message);
+        toast({ title: "Error", description: "Invalid email or password.", variant: "destructive" });
       } else {
         navigate("/");
       }
@@ -47,7 +49,8 @@ const Auth = () => {
         options: { emailRedirectTo: window.location.origin },
       });
       if (error) {
-        toast({ title: "Error", description: error.message, variant: "destructive" });
+        console.error("Signup error:", error.message);
+        toast({ title: "Error", description: "Unable to create account. Please try again.", variant: "destructive" });
       } else {
         toast({
           title: "Check your email",
