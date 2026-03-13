@@ -44,7 +44,7 @@ const GiftSection = () => {
               Know someone with Irish roots? Or a friend fascinated by languages? A gift voucher for a live Irish lesson is a truly unique and meaningful present.
             </p>
             <p className="font-body text-muted-foreground leading-relaxed mb-8">
-              They'll receive a beautiful digital voucher by email, redeemable for a 45-minute live beginner lesson with notes and handouts included. Valid for 12 months.
+              They'll receive a beautiful digital voucher by email, redeemable for a 45-minute live beginner lesson with notes and handouts included. They'll receive a beautiful digital voucher by email, redeemable for a 45-minute live beginner lesson with notes and handouts included. Valid for 6 months.
             </p>
             <Button
               size="lg"
