@@ -1,5 +1,6 @@
 import { useState } from "react";
 import heroImage from "@/assets/hero-ireland.jpg";
+import { supabase } from "@/integrations/supabase/client";
 import celticKnot from "@/assets/celtic-knot.png";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Mail } from "lucide-react";
@@ -24,15 +25,25 @@ const HeroSection = () => {
       return;
     }
     setSubmitting(true);
-    // For now, just show success — can be wired to a backend later
-    setTimeout(() => {
+    try {
+      const { error } = await supabase
+        .from("newsletter_subscribers")
+        .insert({
+          first_name: firstName.trim(),
+          email: email.trim().toLowerCase(),
+          level: level || null,
+        });
+      if (error) throw error;
       toast({ title: "Subscribed!", description: "Thanks for signing up. We'll be in touch!" });
       setOpen(false);
       setFirstName("");
       setEmail("");
       setLevel("");
+    } catch (err: any) {
+      toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
+    } finally {
       setSubmitting(false);
-    }, 600);
+    }
   };
 
   return (
