@@ -1,9 +1,40 @@
+import { useState } from "react";
 import heroImage from "@/assets/hero-ireland.jpg";
 import celticKnot from "@/assets/celtic-knot.png";
 import { Button } from "@/components/ui/button";
-import { Gift, BookOpen } from "lucide-react";
+import { BookOpen, Mail } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 const HeroSection = () => {
+  const [open, setOpen] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [level, setLevel] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstName.trim() || !email.trim()) {
+      toast({ title: "Please fill in your name and email", variant: "destructive" });
+      return;
+    }
+    setSubmitting(true);
+    // For now, just show success — can be wired to a backend later
+    setTimeout(() => {
+      toast({ title: "Subscribed!", description: "Thanks for signing up. We'll be in touch!" });
+      setOpen(false);
+      setFirstName("");
+      setEmail("");
+      setLevel("");
+      setSubmitting(false);
+    }, 600);
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
@@ -29,12 +60,14 @@ const HeroSection = () => {
             <BookOpen className="mr-2 h-5 w-5" />
             Book a Lesson — $99
           </Button>
-          <a href="#gift">
-            <Button size="lg" className="bg-primary-foreground/15 backdrop-blur-sm border-2 border-secondary/60 text-secondary hover:bg-primary-foreground/25 font-body text-lg px-8 py-6 rounded-lg">
-              <Gift className="mr-2 h-5 w-5" />
-              Give as a Gift
-            </Button>
-          </a>
+          <Button
+            size="lg"
+            onClick={() => setOpen(true)}
+            className="bg-primary-foreground/15 backdrop-blur-sm border-2 border-secondary/60 text-secondary hover:bg-primary-foreground/25 font-body text-lg px-8 py-6 rounded-lg"
+          >
+            <Mail className="mr-2 h-5 w-5" />
+            Subscribe to our Newsletter
+          </Button>
         </div>
 
         {/* St. Patrick's Day Offer CTA */}
@@ -52,6 +85,63 @@ const HeroSection = () => {
           <div className="w-1.5 h-3 bg-primary-foreground/60 rounded-full" />
         </div>
       </div>
+
+      {/* Newsletter Subscribe Dialog */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl">Subscribe to our Newsletter</DialogTitle>
+            <DialogDescription className="font-body">
+              Stay updated with Irish language tips, lesson schedules, and special offers.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleSubscribe} className="space-y-4 mt-2">
+            <div className="space-y-2">
+              <Label htmlFor="firstName" className="font-body">First Name</Label>
+              <Input
+                id="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Your first name"
+                required
+                maxLength={100}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email" className="font-body">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
+                maxLength={255}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="level" className="font-body">Level <span className="text-muted-foreground">(optional)</span></Label>
+              <Select value={level} onValueChange={setLevel}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose your level" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="beginner">Beginner</SelectItem>
+                  <SelectItem value="some-irish">Some Irish</SelectItem>
+                  <SelectItem value="intermediate">Intermediate</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button
+              type="submit"
+              disabled={submitting}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-body text-lg py-5"
+            >
+              {submitting ? "Subscribing..." : "Subscribe"}
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
