@@ -1,5 +1,6 @@
 import { useState } from "react";
 import heroImage from "@/assets/hero-ireland.jpg";
+import { supabase } from "@/integrations/supabase/client";
 import celticKnot from "@/assets/celtic-knot.png";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Mail } from "lucide-react";
